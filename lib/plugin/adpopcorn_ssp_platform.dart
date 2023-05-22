@@ -150,8 +150,8 @@ abstract class AdPopcornSSPPlatform extends PlatformInterface {
     throw UnimplementedError('loadPopupAd() has not been implemented.');
   }
 
-  Future<void> showPopupAd() {
-    throw UnimplementedError('showPopupAd() has not been implemented.');
+  Future<void> apRewardVideoAd() {
+    throw UnimplementedError('apRewardVideoAd() has not been implemented.');
   }
 
   Future<void> showBannerAd() {
@@ -160,5 +160,11 @@ abstract class AdPopcornSSPPlatform extends PlatformInterface {
 
   Future<void> stopBannerAd() {
     throw UnimplementedError('stopBannerAd() has not been implemented.');
+  }
+  Future<void> interstitialAd() {
+    throw UnimplementedError('interstitialAd() has not been implemented.');
+  }
+  Future<void> apInterstitialVideoAd() {
+    throw UnimplementedError('apInterstitialVideoAd() has not been implemented.');
   }
 }

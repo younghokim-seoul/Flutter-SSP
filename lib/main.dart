@@ -3,7 +3,8 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:ssp_sapme/adview_widget.dart';
+import 'package:ssp_sapme/banner_adview_widget.dart';
+import 'package:ssp_sapme/native_adview_widget.dart';
 import 'package:ssp_sapme/plugin/adpopcorn_ssp.dart';
 
 void main() {
@@ -46,14 +47,15 @@ class _MyAppState extends State<MyApp> {
 
   void initAndroid() {
     widgetsByPlatform = [
-      buildSetUserId(),
+      // buildSetUserId(),
       buildOpenBanner(),
-      buildGetEarnableTotalRewardInfo(),
-      buildUseFlagShowWhenLocked(),
-      buildOpenCSPage(),
-      buildLoadPopupAd(),
-      buildShowPopupAd(),
-      buildAdView(),
+      buildInterstitialAd(),
+      buildRewardVideoAd(),
+      buildInterstitialVideoAd(),
+      // buildOpenCSPage(),
+      // buildLoadPopupAd(),
+      buildBannerView(),
+      buildNativeAdView()
     ];
     AdPopcornSSP.setOnAgreePrivacy(() => showSnackBar('onAgreePrivacy()'));
     AdPopcornSSP.setOnDisagreePrivacy(
@@ -186,12 +188,20 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Widget buildAdView() {
+  Widget buildBannerView() {
     return Container(
         width: double.infinity,
-        height: 50,
+        height: 100,
         color: Colors.amber,
-        child: PlatformWidget());
+        child: BannerWidget());
+  }
+
+  Widget buildNativeAdView() {
+    return Container(
+        width: double.infinity,
+        height: 100,
+        color: Colors.amber,
+        child: NativeAdWidget());
   }
 
   Widget buildOpenBanner() {
@@ -205,7 +215,7 @@ class _MyAppState extends State<MyApp> {
               log('openBanner()');
               await AdPopcornSSP.showBannerAd();
             },
-            child: const Text('openBanner()'),
+            child: const Text('배너 시작'),
           ),
         ),
         SizedBox(width: 10),
@@ -216,7 +226,7 @@ class _MyAppState extends State<MyApp> {
               log('stopBanner()');
               await AdPopcornSSP.stopBannerAd();
             },
-            child: const Text('stopBanner()'),
+            child: const Text('배너 종료'),
           ),
         ),
         SizedBox(width: 10),
@@ -224,15 +234,23 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Widget buildUseFlagShowWhenLocked() {
+  Widget buildRewardVideoAd() {
     return ElevatedButton(
       onPressed: () async {
-        final flag = random.nextBool();
-        log('useFlagShowWhenLocked() flag=$flag');
-        await AdPopcornSSP.useFlagShowWhenLocked(flag);
-        showSnackBar('useFlagShowWhenLocked($flag)');
+        log('apRewardVideoAd()');
+        await AdPopcornSSP.apRewardVideoAd();
       },
-      child: const Text('useFlagShowWhenLocked()'),
+      child: const Text('리워드 비디오 광고'),
+    );
+  }
+
+  Widget buildInterstitialVideoAd() {
+    return ElevatedButton(
+      onPressed: () async {
+        log('apInterstitialVideoAd()');
+        await AdPopcornSSP.apInterstitialVideoAd();
+      },
+      child: const Text('전면 비디오 광고'),
     );
   }
 
@@ -246,17 +264,13 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Widget buildGetEarnableTotalRewardInfo() {
+  Widget buildInterstitialAd() {
     return ElevatedButton(
       onPressed: () async {
         log('getEarnableTotalRewardInfo()');
-        await AdPopcornSSP.getEarnableTotalRewardInfo(
-            (queryResult, totalCount, totalReward) {
-          showSnackBar(
-              'onGetEarnableTotalRewardInfo() queryResult=$queryResult, totalCount=$totalCount, totalReward=$totalReward');
-        });
+        await AdPopcornSSP.interstitialAd();
       },
-      child: const Text('getEarnableTotalRewardInfo()'),
+      child: const Text('전면 광고 로드'),
     );
   }
 
@@ -278,13 +292,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Widget buildShowPopupAd() {
-    return ElevatedButton(
-      onPressed: () async {
-        log('showPopupAd()');
-        await AdPopcornSSP.showPopupAd();
-      },
-      child: const Text('showPopupAd()'),
-    );
-  }
 }

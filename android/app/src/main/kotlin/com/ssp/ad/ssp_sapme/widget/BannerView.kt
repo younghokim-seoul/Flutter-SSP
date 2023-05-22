@@ -15,7 +15,7 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.platform.PlatformView
 
 
-class NativeView(context: Context?, messenger: BinaryMessenger, id: Int, creationParams: Map<String?, Any?>?) : PlatformView , MethodCallHandler{
+class BannerView(context: Context?, messenger: BinaryMessenger, id: Int, creationParams: Map<String?, Any?>?) : PlatformView , MethodCallHandler{
     private val adView: AdPopcornSSPBannerAd = AdPopcornSSPBannerAd(context)
 
     private lateinit var channel: MethodChannel
@@ -29,12 +29,12 @@ class NativeView(context: Context?, messenger: BinaryMessenger, id: Int, creatio
     private val methodChannel: MethodChannel = MethodChannel(messenger, "BannerPlatformView")
 
     init {
-        Log.i("young","와이키키")
+        Log.i("young","BannerView init")
 //        val message: String = creationParams?.get("key").toString()
 
         methodChannel.setMethodCallHandler(this)
 
-        adView.setAdSize(AdSize.BANNER_320x50);
+        adView.setAdSize(AdSize.BANNER_320x100);
         adView.placementId = SSPType.BANNER.keyValue
         adView.setBannerEventCallbackListener(object : IBannerEventCallbackListener {
 

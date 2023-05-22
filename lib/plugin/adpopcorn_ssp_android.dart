@@ -4,7 +4,6 @@ import 'package:ssp_sapme/plugin/adpopcorn_ssp_platform.dart';
 const channelName = 'adpopcorn_flutter_sdk';
 
 class AdPopcornSSPAndroid extends AdPopcornSSPPlatform {
-
   final noArgListeners = <String, NoArgumentListener?>{};
   final popupAdErrorListeners = <String, PopupAdErrorListener?>{};
   OnGetEarnableTotalRewardInfo? onGetEarnableTotalRewardInfo;
@@ -20,7 +19,7 @@ class AdPopcornSSPAndroid extends AdPopcornSSPPlatform {
     }
 
     PopupAdErrorListener? popupAdErrorListener =
-    popupAdErrorListeners[call.method];
+        popupAdErrorListeners[call.method];
     if (popupAdErrorListener != null) {
       return popupAdErrorListener(
         call.arguments['errorCode'],
@@ -39,7 +38,8 @@ class AdPopcornSSPAndroid extends AdPopcornSSPPlatform {
 
   @override
   Future<void> setUserId(String userId) async {
-    return await invokeMethodAndHandleException('setUserId', {'userId': userId});
+    return await invokeMethodAndHandleException(
+        'setUserId', {'userId': userId});
   }
 
   @override
@@ -64,12 +64,14 @@ class AdPopcornSSPAndroid extends AdPopcornSSPPlatform {
 
   @override
   Future<void> useFlagShowWhenLocked(bool flag) async {
-    return await invokeMethodAndHandleException('useFlagShowWhenLocked', {'flag': flag});
+    return await invokeMethodAndHandleException(
+        'useFlagShowWhenLocked', {'flag': flag});
   }
 
   @override
   Future<void> openCSPage(String userId) async {
-    return await invokeMethodAndHandleException('openCSPage', {'userId': userId});
+    return await invokeMethodAndHandleException(
+        'openCSPage', {'userId': userId});
   }
 
   @override
@@ -96,18 +98,29 @@ class AdPopcornSSPAndroid extends AdPopcornSSPPlatform {
   }
 
   @override
-  Future<void> showPopupAd() async {
-    return await invokeMethodAndHandleException('showPopupAd');
+  Future<void> apInterstitialVideoAd() async {
+    return await invokeMethodAndHandleException('apInterstitialVideoAd');
+  }
+
+  @override
+  Future<void> apRewardVideoAd() async {
+    return await invokeMethodAndHandleException('apRewardVideoAd');
   }
 
   @override
   Future<void> showBannerAd() async {
-    return await invokeMethodAndHandleException2('showBannerAd',{"optType": "show"});
+    return await invokeMethodAndHandleException2(
+        'showBannerAd', {"optType": "show"});
   }
 
   @override
   Future<void> stopBannerAd() async {
-    return await invokeMethodAndHandleException2('stopBannerAd',{"optType": "stop"});
+    return await invokeMethodAndHandleException2(
+        'stopBannerAd', {"optType": "stop"});
   }
 
+  @override
+  Future<void> interstitialAd() async {
+    return await invokeMethodAndHandleException('interstitialAd');
+  }
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#FFFFFF">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:background="#FFFFFF">
+        <ImageView
+            android:id="@+id/apssp_native_ad_icon_image1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"/>
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/apssp_native_ad_title1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"/>
+            <TextView
+                android:id="@+id/apssp_native_ad_desc1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:textColor="#000000"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/apssp_native_ad_ctatext1"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#3d7caf"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:gravity="center"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/apssp_native_ad_main_image1"
+        android:layout_width="match_parent"
+        android:layout_height="183dp"/>
+</LinearLayout>

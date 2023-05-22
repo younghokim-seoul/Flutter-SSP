@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.igaworks.ssp.part.nativead.AdPopcornSSPNativeAd
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/apssp_mediation_native_ad"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- ADPopopcorn SSP-->
+    <include
+        android:id="@+id/apssp_native_ad_view"
+        layout="@layout/apssp_native_ad_unit_layout"/>
+
+<!--    &lt;!&ndash; AdMob &ndash;&gt;-->
+<!--    <com.google.android.gms.ads.nativead.NativeAdView-->
+<!--        android:id="@+id/admob_unified_native_ad_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+<!--        <include layout="@layout/admob_native_ad_unit_layout"/>-->
+<!--    </com.google.android.gms.ads.nativead.NativeAdView>-->
+
+</com.igaworks.ssp.part.nativead.AdPopcornSSPNativeAd>

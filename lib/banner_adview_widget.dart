@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
-class PlatformWidget extends StatelessWidget {
+class BannerWidget extends StatelessWidget {
   static const String PLUGIN_VIEW_TYPE = "BannerPlatformView";
 
-  const PlatformWidget({Key? key}) : super(key: key);
-  static const StandardMessageCodec _decoder = StandardMessageCodec();
+  const BannerWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     if (Platform.isAndroid) {

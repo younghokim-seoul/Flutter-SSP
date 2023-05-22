@@ -85,8 +85,8 @@ class AdPopcornSSP {
     );
   }
 
-  static Future<void> showPopupAd() {
-    return AdPopcornSSPPlatform.instance.showPopupAd();
+  static Future<void> apRewardVideoAd() {
+    return AdPopcornSSPPlatform.instance.apRewardVideoAd();
   }
 
   static Future<void> showBannerAd() {
@@ -95,4 +95,13 @@ class AdPopcornSSP {
   static Future<void> stopBannerAd() {
     return AdPopcornSSPPlatform.instance.stopBannerAd();
   }
+
+  static Future<void> interstitialAd() {
+    return AdPopcornSSPPlatform.instance.interstitialAd();
+  }
+
+  static Future<void> apInterstitialVideoAd() {
+    return AdPopcornSSPPlatform.instance.apInterstitialVideoAd();
+  }
+
 }
