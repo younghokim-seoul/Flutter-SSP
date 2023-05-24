@@ -6,7 +6,6 @@ const channelName = 'adpopcorn_flutter_sdk';
 class AdPopcornSSPAndroid extends AdPopcornSSPPlatform {
   final noArgListeners = <String, NoArgumentListener?>{};
   final popupAdErrorListeners = <String, PopupAdErrorListener?>{};
-  OnGetEarnableTotalRewardInfo? onGetEarnableTotalRewardInfo;
 
   AdPopcornSSPAndroid() {
     methodChannel.setMethodCallHandler(handleMethodCall);
@@ -26,59 +25,11 @@ class AdPopcornSSPAndroid extends AdPopcornSSPPlatform {
         call.arguments['errorMessage'],
       );
     }
-
-    if (call.method == 'onGetEarnableTotalRewardInfo') {
-      return onGetEarnableTotalRewardInfo!(
-        call.arguments['queryResult'],
-        call.arguments['totalCount'],
-        call.arguments['totalReward'],
-      );
-    }
   }
 
   @override
-  Future<void> setUserId(String userId) async {
-    return await invokeMethodAndHandleException(
-        'setUserId', {'userId': userId});
-  }
-
-  @override
-  Future<void> openOfferWall() async {
-    return await invokeMethodAndHandleException('openOfferWall');
-  }
-
-  @override
-  Future<void> setOnAgreePrivacy(NoArgumentListener listener) async {
-    noArgListeners['onAgreePrivacy'] = listener;
-  }
-
-  @override
-  Future<void> setOnDisagreePrivacy(NoArgumentListener listener) async {
-    noArgListeners['onDisagreePrivacy'] = listener;
-  }
-
-  @override
-  Future<void> setOnClosedOfferWallPage(NoArgumentListener listener) async {
-    noArgListeners['onClosedOfferWallPage'] = listener;
-  }
-
-  @override
-  Future<void> useFlagShowWhenLocked(bool flag) async {
-    return await invokeMethodAndHandleException(
-        'useFlagShowWhenLocked', {'flag': flag});
-  }
-
-  @override
-  Future<void> openCSPage(String userId) async {
-    return await invokeMethodAndHandleException(
-        'openCSPage', {'userId': userId});
-  }
-
-  @override
-  Future<void> getEarnableTotalRewardInfo(
-      OnGetEarnableTotalRewardInfo callback) async {
-    onGetEarnableTotalRewardInfo = callback;
-    return await invokeMethodAndHandleException('getEarnableTotalRewardInfo');
+  Future<void> setOnAdInit(NoArgumentListener listener) async {
+    noArgListeners['onInitialized'] = listener;
   }
 
   @override
@@ -103,7 +54,24 @@ class AdPopcornSSPAndroid extends AdPopcornSSPPlatform {
   }
 
   @override
-  Future<void> apRewardVideoAd() async {
+  Future<void> apRewardVideoAd({
+    NoArgumentListener? onRewardVideoAdLoaded,
+    PopupAdErrorListener? onRewardVideoAdLoadFailed,
+    NoArgumentListener? onRewardVideoAdOpened,
+    NoArgumentListener? onRewardVideoAdOpenFalied,
+    NoArgumentListener? onRewardVideoAdClosed,
+    NoArgumentListener? onRewardVideoPlayCompleted,
+    NoArgumentListener? onRewardVideoAdClicked,
+  }) async {
+    noArgListeners['onRewardVideoAdLoaded'] = onRewardVideoAdLoaded;
+    popupAdErrorListeners['onRewardVideoAdLoadFailed'] =
+        onRewardVideoAdLoadFailed;
+    noArgListeners['onRewardVideoAdOpened'] = onRewardVideoAdOpened;
+    noArgListeners['onRewardVideoAdOpenFalied'] = onRewardVideoAdOpenFalied;
+    noArgListeners['onRewardVideoAdClosed'] = onRewardVideoAdClosed;
+    noArgListeners['onRewardVideoPlayCompleted'] = onRewardVideoPlayCompleted;
+    noArgListeners['onRewardVideoAdClicked'] = onRewardVideoAdClicked;
+
     return await invokeMethodAndHandleException('apRewardVideoAd');
   }
 

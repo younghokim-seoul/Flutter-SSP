@@ -47,21 +47,15 @@ class _MyAppState extends State<MyApp> {
 
   void initAndroid() {
     widgetsByPlatform = [
-      // buildSetUserId(),
       buildOpenBanner(),
       buildInterstitialAd(),
       buildRewardVideoAd(),
       buildInterstitialVideoAd(),
-      // buildOpenCSPage(),
-      // buildLoadPopupAd(),
       buildBannerView(),
       buildNativeAdView()
     ];
-    AdPopcornSSP.setOnAgreePrivacy(() => showSnackBar('onAgreePrivacy()'));
-    AdPopcornSSP.setOnDisagreePrivacy(
-        () => showSnackBar('onDisagreePrivacy()'));
-    AdPopcornSSP.setOnClosedOfferWallPage(
-        () => showSnackBar('onClosedOfferWallPage()'));
+    //애드팝콘 sdk init시 콜백...
+    AdPopcornSSP.setOnAdInit(() => showSnackBar('setOnAdInit()'));
   }
 
   void showSnackBar(String text) {
@@ -102,89 +96,6 @@ class _MyAppState extends State<MyApp> {
           )),
         ),
       ),
-    );
-  }
-
-  Widget buildSetAppKeyHashKey() {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 100,
-              child: TextFormField(
-                controller: textControllerAppKey,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'App key',
-                ),
-              ),
-            ),
-            const SizedBox(width: 8),
-            SizedBox(
-              width: 100,
-              child: TextFormField(
-                controller: textControllerHashKey,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Hash key',
-                ),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        ElevatedButton(
-          onPressed: () async {
-            final appKey = textControllerAppKey.text;
-            final hashKey = textControllerHashKey.text;
-            log('setAppKeyAndHashKey() appKey=$appKey, hashKey=$hashKey');
-            await AdPopcornSSP.setAppKeyAndHashKey(appKey, hashKey);
-            showSnackBar('setAppKeyAndHashKey()');
-          },
-          child: const Text('setAppKeyAndHashKey()'),
-        ),
-      ],
-    );
-  }
-
-  Widget buildUseIgaworksRewardServer() {
-    return ElevatedButton(
-      onPressed: () async {
-        final flag = random.nextBool();
-        log('useIgaworksRewardServer() flag=$flag');
-        await AdPopcornSSP.useIgaworksRewardServer(flag);
-        showSnackBar('useIgaworksRewardServer($flag)');
-      },
-      child: const Text('useIgaworksRewardServer()'),
-    );
-  }
-
-  Widget buildSetUserId() {
-    return Column(
-      children: [
-        SizedBox(
-          width: 200,
-          child: TextFormField(
-            controller: textControllerUserId,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'User ID',
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        ElevatedButton(
-          onPressed: () async {
-            userId = textControllerUserId.text;
-            log('setUserId() id=$userId');
-            await AdPopcornSSP.setUserId(userId);
-            showSnackBar('setUserId()');
-          },
-          child: const Text('setUserId()'),
-        ),
-      ],
     );
   }
 
@@ -238,7 +149,16 @@ class _MyAppState extends State<MyApp> {
     return ElevatedButton(
       onPressed: () async {
         log('apRewardVideoAd()');
-        await AdPopcornSSP.apRewardVideoAd();
+        await AdPopcornSSP.apRewardVideoAd(
+          onRewardVideoAdLoaded: () => showSnackBar('onRewardVideoAdLoaded()'),
+          onRewardVideoAdLoadFailed: (errorCode, errorMessage) => showSnackBar(
+              'onRewardVideoAdLoadFailed() errorCode=$errorCode, errorMessage=$errorMessage'),
+          onRewardVideoAdOpened: () => showSnackBar('onRewardVideoAdOpened()'),
+          onRewardVideoAdOpenFalied: () => showSnackBar('onRewardVideoAdOpenFalied()'),
+          onRewardVideoAdClosed: () => showSnackBar('onRewardVideoAdClosed()'),
+          onRewardVideoPlayCompleted: () => showSnackBar('onRewardVideoPlayCompleted()'),
+          onRewardVideoAdClicked: () => showSnackBar('onRewardVideoAdClicked()'),
+        );
       },
       child: const Text('리워드 비디오 광고'),
     );
@@ -251,16 +171,6 @@ class _MyAppState extends State<MyApp> {
         await AdPopcornSSP.apInterstitialVideoAd();
       },
       child: const Text('전면 비디오 광고'),
-    );
-  }
-
-  Widget buildOpenCSPage() {
-    return ElevatedButton(
-      onPressed: () async {
-        log('openCSPage() userId=$userId');
-        await AdPopcornSSP.openCSPage(userId);
-      },
-      child: const Text('openCSPage()'),
     );
   }
 
@@ -291,5 +201,4 @@ class _MyAppState extends State<MyApp> {
       child: const Text('loadPopupAd()'),
     );
   }
-
 }

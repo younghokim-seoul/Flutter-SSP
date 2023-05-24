@@ -6,11 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:ssp_sapme/plugin/adpopcorn_ssp_android.dart';
 
-
-
-
-typedef OnGetEarnableTotalRewardInfo = void Function(
-    bool queryResult, int totalCount, String totalReward);
 typedef NoArgumentListener = void Function();
 typedef PopupAdErrorListener = void Function(
     int errorCode, String errorMessage);
@@ -32,7 +27,8 @@ abstract class AdPopcornSSPPlatform extends PlatformInterface {
   final MethodChannel methodChannel = const MethodChannel(channelName);
 
   @protected
-  final MethodChannel methodChannel2 = const MethodChannel("BannerPlatformView");
+  final MethodChannel methodChannel2 =
+      const MethodChannel("BannerPlatformView");
 
   AdPopcornSSPPlatform() : super(token: _token);
 
@@ -70,74 +66,8 @@ abstract class AdPopcornSSPPlatform extends PlatformInterface {
     }
   }
 
-  Future<void> setAppKeyAndHashKey(String appKey, String hashKey) async {
-    throw UnimplementedError('setAppKeyAndHashKey() has not been implemented.');
-  }
-
-  Future<void> useIgaworksRewardServer(bool flag) async {
-    throw UnimplementedError(
-        'useIgaworksRewardServer() has not been implemented.');
-  }
-
-  Future<void> setLogLevel(AdPopcornLogLevel level) async {
-    throw UnimplementedError('setLogLevel() has not been implemented.');
-  }
-
-  Future<void> setUserId(String userId) {
-    throw UnimplementedError('setUserId() has not been implemented.');
-  }
-
-  Future<void> openOfferWall() {
-    throw UnimplementedError('openOfferWall() has not been implemented.');
-  }
-
-  Future<void> setOnAgreePrivacy(NoArgumentListener listener) {
-    throw UnimplementedError('setOnAgreePrivacy() has not been implemented.');
-  }
-
-  Future<void> setOnDisagreePrivacy(NoArgumentListener listener) {
-    throw UnimplementedError(
-        'setOnDisagreePrivacy() has not been implemented.');
-  }
-
-  Future<void> setOnClosedOfferWallPage(NoArgumentListener listener) {
-    throw UnimplementedError(
-        'setOnClosedOfferWallPage() has not been implemented.');
-  }
-
-  Future<void> setOnWillOpenOfferWall(NoArgumentListener listener) {
-    throw UnimplementedError(
-        'setOnWillOpenOfferWall() has not been implemented.');
-  }
-
-  Future<void> setOnDidOpenOfferWall(NoArgumentListener listener) {
-    throw UnimplementedError(
-        'setOnDidOpenOfferWall() has not been implemented.');
-  }
-
-  Future<void> setOnWillCloseOfferWall(NoArgumentListener listener) {
-    throw UnimplementedError(
-        'setOnWillCloseOfferWall() has not been implemented.');
-  }
-
-  Future<void> setOnDidCloseOfferWall(NoArgumentListener listener) {
-    throw UnimplementedError(
-        'setOnDidCloseOfferWall() has not been implemented.');
-  }
-
-  Future<void> useFlagShowWhenLocked(bool flag) {
-    throw UnimplementedError(
-        'useFlagShowWhenLocked() has not been implemented.');
-  }
-
-  Future<void> openCSPage(String userId) {
-    throw UnimplementedError('openCSPage() has not been implemented.');
-  }
-
-  Future<void> getEarnableTotalRewardInfo(
-      OnGetEarnableTotalRewardInfo callback) {
-    throw UnimplementedError(
-        'getEarnableTotalRewardInfo() has not been implemented.');
+  Future<void> setOnAdInit(NoArgumentListener listener) {
+    throw UnimplementedError('setOnAdInit() has not been implemented.');
   }
 
   Future<void> loadPopupAd({
@@ -150,7 +80,15 @@ abstract class AdPopcornSSPPlatform extends PlatformInterface {
     throw UnimplementedError('loadPopupAd() has not been implemented.');
   }
 
-  Future<void> apRewardVideoAd() {
+  Future<void> apRewardVideoAd({
+    NoArgumentListener? onRewardVideoAdLoaded,
+    PopupAdErrorListener? onRewardVideoAdLoadFailed,
+    NoArgumentListener? onRewardVideoAdOpened,
+    NoArgumentListener? onRewardVideoAdOpenFalied,
+    NoArgumentListener? onRewardVideoAdClosed,
+    NoArgumentListener? onRewardVideoPlayCompleted,
+    NoArgumentListener? onRewardVideoAdClicked,
+  }) {
     throw UnimplementedError('apRewardVideoAd() has not been implemented.');
   }
 
@@ -161,10 +99,13 @@ abstract class AdPopcornSSPPlatform extends PlatformInterface {
   Future<void> stopBannerAd() {
     throw UnimplementedError('stopBannerAd() has not been implemented.');
   }
+
   Future<void> interstitialAd() {
     throw UnimplementedError('interstitialAd() has not been implemented.');
   }
+
   Future<void> apInterstitialVideoAd() {
-    throw UnimplementedError('apInterstitialVideoAd() has not been implemented.');
+    throw UnimplementedError(
+        'apInterstitialVideoAd() has not been implemented.');
   }
 }
